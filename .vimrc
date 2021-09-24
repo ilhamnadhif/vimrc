@@ -1,6 +1,11 @@
 "*****************************************************************************
 "" Vim-PLug core
 "*****************************************************************************
+
+if filereadable(expand("~/.config/vim/plug-config"))
+    source $HOME\.config\vim\plug-config\coc.vim
+endif
+
 if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
@@ -82,7 +87,7 @@ Plug 'tomasr/molokai'
 " c
 Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
 Plug 'ludwig/split-manpage.vim'
-
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " html
 "" HTML Bundle
@@ -177,7 +182,7 @@ let g:session_command_aliases = 1
 "*****************************************************************************
 syntax on
 set ruler
-set number
+set relativenumber
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
@@ -187,7 +192,7 @@ endif
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
-set gfn=Monospace\ 10
+set gfn=Monospace\ 13
 
 if has("gui_running")
   if has("gui_mac") || has("gui_macvim")
@@ -475,6 +480,7 @@ nnoremap <Leader>o :.Gbrowse<CR>
 " c
 autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType cpp nnoremap <buffer> <F5> :w<CR>:!g++ -o %< % && ./%< <CR>
 
 
 " html
@@ -574,3 +580,4 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
